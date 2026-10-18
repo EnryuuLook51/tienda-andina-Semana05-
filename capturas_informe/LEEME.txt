@@ -1,0 +1,61 @@
+CAPTURAS PARA EL INFORME — TIENDA ANDINA
+
+CONTENIDO
+- 40 imágenes PNG numeradas, obtenidas de una ejecución real del aplicativo.
+- Texto_para_informe.txt: introducción, título "Imagen N", archivo asociado y párrafo
+  explicativo de cada captura, más una conclusión sugerida.
+- ejemplo_ticket.txt: ticket exportado desde el aplicativo durante el recorrido.
+
+CÓMO USARLO EN EL DOCX
+1. Abrir Texto_para_informe.txt.
+2. En la sección "3. Aplicativo (Java Swing)", copiar la introducción sugerida.
+3. Para cada figura elegida, poner su título, insertar el PNG y pegar el párrafo.
+4. Si el informe ya usa figuras numeradas, ajustar la numeración: los nombres de
+   archivo identifican las capturas, no obligan a comenzar de nuevo desde Imagen 1.
+5. Mantener la relación de aspecto. Las ventanas completas son horizontales y los
+   diálogos son más pequeños. No estirar los diálogos hasta deformar las letras.
+6. Si 40 figuras hacen muy extenso el cuerpo, poner el resto en anexos.
+
+PROPUESTA DE ORGANIZACIÓN
+3.1 Acceso y pantalla inicial: imágenes 01–02.
+3.2 Compra, cálculo, pago y ticket: 03–07.
+3.3 Flujo de transferencia, despacho y recepción: 08, 11–14 y 17.
+3.4 Cancelación, acceso digital y beneficios: 10, 15–16 y 18–20.
+3.5 Administración, reportes y parámetros: 21–29 y 33.
+3.6 Validaciones y persistencia: 09, 30–32 y 34.
+3.7 Casos adicionales: 35–40.
+
+SELECCIÓN BREVE SI NECESITAS REDUCIR PÁGINAS
+Usar 01, 03, 04, 05, 08, 11, 13, 14, 17, 20, 21, 22, 23, 27, 31, 34, 35 y 36
+en el cuerpo; conservar las otras 22 imágenes como evidencia complementaria/anexos.
+La selección es una recomendación, no es necesario insertar todas las capturas.
+
+RECORRIDO MOSTRADO
+- Cliente: carrito mixto, registro pendiente, tarjeta, boleta y exportación de ticket.
+- Transferencia: registro por cliente, revisión y confirmación por operador, despacho
+  y recepción por cliente.
+- Cancelación: confirmación, reembolso simulado y conservación del documento histórico.
+- Digital/suscripción: pago y entrega automática con acceso local.
+- VIP/corporativo: beneficios, factura y notificación adicional SMS al despachar VIP.
+- Administrador: reportes, cupones, alta/edición/baja de catálogo, tarifas y parámetros.
+- Validaciones: falta de stock, cupón vencido, uso repetido y límite de Yape.
+- Reinicio: recuperación de pedidos, ventas y datos guardados.
+- Otras reglas: contraentrega, express, volumen y recojo gratuito.
+
+ACLARACIONES IMPORTANTES
+Los datos de las capturas son de prueba y estuvieron separados de los datos normales
+de la aplicación. No se modificó tu DOCX ni el archivo Astah. No se retocaron importes
+en las imágenes. Cobros, reembolsos, correos y SMS son simulados; los accesos digitales
+son registros locales. Los tickets no tienen validez tributaria.
+
+El stock se valida por lote y las pruebas automatizadas comprueban la ausencia de
+descuentos parciales; la imagen del mensaje por sí sola no demuestra esa atomicidad.
+Lo mismo aplica al aislamiento de errores: la imagen 29 muestra cero errores en este
+recorrido, no una falla provocada de un proveedor real.
+
+REPRODUCIR EL RECORRIDO (opcional)
+Desde tienda-andina, compilar las pruebas con:
+sh ejecutar.sh --pruebas
+Luego ejecutar, con escritorio gráfico y una carpeta de destino NUEVA:
+java -cp out pe.tiendaandina.CapturasInforme /ruta/a/carpeta_nueva
+No es necesario repetirlo para utilizar las imágenes de esta carpeta.

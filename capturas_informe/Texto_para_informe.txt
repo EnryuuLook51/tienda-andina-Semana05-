@@ -1,0 +1,214 @@
+3. APLICATIVO JAVA SWING — TIENDA ANDINA
+
+Texto sugerido para el informe. Insertar cada PNG después de su título y usar el párrafo como explicación. La numeración puede adaptarse a las figuras previas del documento.
+
+El aplicativo implementa los flujos de pedidos definidos en la práctica, con acceso separado para Cliente, Operador y Administrador. Se desarrolló en Java Swing y utiliza persistencia local. Las siguientes capturas corresponden a una ejecución real con datos de demostración aislados; pagos y notificaciones son simulados.
+
+Imagen 1. Inicio de sesión y acceso por roles
+Archivo: 01_login.png
+
+El aplicativo solicita usuario y contraseña antes de permitir el acceso. La cuenta autenticada determina las operaciones disponibles para Cliente, Operador o Administrador. Las cuentas mostradas son exclusivamente de demostración.
+
+Imagen 2. Pantalla inicial del cliente
+Archivo: 02_inicio_cliente.png
+
+La pantalla de compra presenta el catálogo, la cantidad, el tipo de envío, el medio de pago y el cupón opcional. El carrito se muestra separado del formulario y los indicadores superiores resumen los pedidos de la sesión del cliente.
+
+Imagen 3. Carrito con productos físicos y digitales
+Archivo: 03_carrito_mixto.png
+
+El cliente agrega una mochila y un curso digital. La tabla permite revisar cantidades, precios e importes antes de registrar el pedido. El subtotal mostrado corresponde a los productos; los descuentos, el envío y el recargo se calculan al registrar.
+
+Imagen 4. Pedido registrado en estado PENDIENTE
+Archivo: 04_pedido_pendiente.png
+
+Al registrar el carrito se crea el pedido y se presenta el desglose de subtotal, descuentos, envío, recargo, base imponible, IGV incluido y total. El comprobante todavía no se ha emitido y el stock se descuenta únicamente cuando se confirma el pago.
+
+Imagen 5. Confirmación de pago y emisión de boleta
+Archivo: 05_pedido_pagado.png
+
+La confirmación cambia el pedido a PAGADO, descuenta el stock del producto físico, genera la boleta y habilita el acceso al curso digital. El cobro se realiza mediante una pasarela simulada. Al contener un artículo físico, el pedido debe pasar por despacho y recepción.
+
+Imagen 6. Exportación del ticket de compra
+Archivo: 06_guardar_ticket.png
+
+El usuario puede guardar el ticket como archivo de texto. El contenido utiliza los importes del comprobante emitido, sin recalcularlos, e incluye la advertencia de que se trata de una demostración sin validez tributaria.
+
+Imagen 7. Registro de actividad y notificación del pago
+Archivo: 07_actividad_pago.png
+
+La sección Actividad registra la operación de cobro simulada y el aviso de cambio de estado. Las notificaciones se envían por observadores desacoplados del pedido; en esta versión los canales de correo y SMS son simulados.
+
+Imagen 8. Pedido con transferencia pendiente de confirmación
+Archivo: 08_transferencia_pendiente.png
+
+Cuando se elige transferencia, el pedido permanece en PENDIENTE. El cliente no puede confirmar el depósito; la acción corresponde al operador. Esta separación evita tratar una transferencia no verificada como una venta.
+
+Imagen 9. Validación de inventario insuficiente
+Archivo: 09_error_stock.png
+
+Si la cantidad solicitada supera el inventario disponible, se rechaza el pago y el pedido permanece pendiente. La validación del lote se realiza antes del cobro y del descuento de existencias, evitando modificaciones parciales del stock.
+
+Imagen 10. Entrega automática de un producto digital
+Archivo: 10_digital_entregado.png
+
+Un pedido que contiene únicamente productos digitales no selecciona envío ni afecta stock. Al confirmar el pago pasa de PAGADO a ENTREGADO automáticamente y registra el acceso digital del cliente. No se implementa una descarga externa real.
+
+Imagen 11. Vista del operador y permisos disponibles
+Archivo: 11_operador.png
+
+El operador dispone de las acciones de confirmación de depósito y despacho. Las acciones exclusivas del cliente y del administrador permanecen deshabilitadas. Los permisos se validan también en los controladores, no solamente en la interfaz.
+
+Imagen 12. Consulta de transferencias pendientes
+Archivo: 12_lista_transferencias.png
+
+El operador consulta los pedidos que esperan verificación bancaria. El listado utiliza el repositorio de pedidos y muestra los importes que deben contrastarse con el depósito antes de confirmar el pago.
+
+Imagen 13. Confirmación del depósito por el operador
+Archivo: 13_deposito_confirmado.png
+
+Tras confirmar el depósito, el pedido pasa a PAGADO, se descuenta el inventario y se emite la boleta. La confirmación manual no aplica recargo por medio de pago.
+
+Imagen 14. Despacho del pedido y estado ENVIADO
+Archivo: 14_pedido_enviado.png
+
+El operador registra el despacho de un pedido pagado. El sistema cambia el estado a ENVIADO y notifica el cambio. Desde este estado ya no se permite cancelar el pedido; la siguiente transición es la confirmación de recepción.
+
+Imagen 15. Confirmación previa a cancelar un pedido pagado
+Archivo: 15_confirmacion_cancelacion.png
+
+La interfaz solicita confirmación antes de cancelar e informa que se repondrá el stock y se registrará un reembolso simulado. Esta advertencia ayuda a prevenir cancelaciones accidentales.
+
+Imagen 16. Pedido cancelado con reposición de stock
+Archivo: 16_pedido_cancelado.png
+
+El pedido pagado se cancela, se repone el inventario físico y se registra el reembolso. Se conserva el documento original como registro histórico, pero el pedido CANCELADO deja de formar parte del reporte de ventas.
+
+Imagen 17. Confirmación de recepción y estado ENTREGADO
+Archivo: 17_recepcion.png
+
+El cliente confirma la recepción del pedido previamente enviado. El estado cambia a ENTREGADO y las acciones de pago, despacho, recepción y cancelación dejan de estar disponibles cuando ya no corresponden al ciclo de vida.
+
+Imagen 18. Descuento y envío estándar gratuito del cliente VIP
+Archivo: 18_beneficios_vip.png
+
+Para un cliente VIP se aplica el 5 % de descuento sobre el subtotal y el envío estándar es gratuito. El resumen muestra ambos beneficios sin alterar la regla del IGV incluido. El pedido físico queda pagado y a la espera de despacho.
+
+Imagen 19. Correo y SMS simulado al despachar un pedido VIP
+Archivo: 19_sms_vip.png
+
+Al pasar a ENVIADO se registra el correo y, adicionalmente, el SMS para el cliente VIP. Esta política adicional también aplica a corporativos, pero no a clientes regulares. Ambos canales siguen siendo simulados.
+
+Imagen 20. Pedido corporativo y emisión de factura
+Archivo: 20_factura_corporativa.png
+
+La cuenta corporativa de demostración cuenta con RUC registrado. Se aplica el descuento del 10 % y se emite una factura con serie F001, independiente del correlativo de boletas B001. Al tratarse de un producto digital, el pedido se entrega automáticamente.
+
+Imagen 21. Panel de administración y reporte por fechas
+Archivo: 21_reporte_admin.png
+
+El administrador consulta un rango de fechas y obtiene subtotal, descuento, IGV y total por pedido, además del acumulado general. Se incluyen solo los estados PAGADO, ENVIADO y ENTREGADO; se excluyen pendientes y cancelados. Los valores provienen de los comprobantes conservados.
+
+Imagen 22. Creación de un cupón promocional
+Archivo: 22_crear_cupon.png
+
+El administrador registra un código, un porcentaje y una fecha de vencimiento. El sistema impide códigos duplicados y valida el vencimiento y el uso único por cliente al registrar o pagar el pedido. El cupón se suma al mayor descuento entre cliente y volumen, con tope global del 30 %.
+
+Imagen 23. Administración del catálogo de productos
+Archivo: 23_catalogo.png
+
+El administrador puede crear productos, editar datos y efectuar una baja lógica. El catálogo contempla artículos físicos, digitales y suscripciones. La baja no elimina los pedidos ni los comprobantes históricos.
+
+Imagen 24. Alta de un producto físico
+Archivo: 24_alta_producto.png
+
+El formulario solicita código, nombre, tipo, precio con IGV, peso y stock. El sistema exige códigos únicos y valores no negativos; para digitales y suscripciones el peso y el stock deben ser cero.
+
+Imagen 25. Modificación de los datos de catálogo
+Archivo: 25_editar_producto.png
+
+El administrador actualiza nombre, precio, peso o inventario. Código y tipo no se modifican. Los precios de los ítems ya agregados y los importes de comprobantes emitidos se conservan para evitar cambios retroactivos en las ventas.
+
+Imagen 26. Confirmación de baja lógica de un producto
+Archivo: 26_baja_producto.png
+
+Antes de dar de baja un producto se solicita confirmación. El registro queda conservado, pero deja de aparecer como opción para nuevas compras. Los pedidos existentes pueden continuar su ciclo de vida.
+
+Imagen 27. Configuración de tarifas y cobertura de envío
+Archivo: 27_envios.png
+
+El administrador modifica el costo fijo y por kilogramo de estándar y express, así como las ciudades atendidas por express. Se mantienen las reglas de estándar gratuito para VIP y recojo gratuito en Chimbote. Los cambios se guardan localmente y no alteran comprobantes ya emitidos.
+
+Imagen 28. Recarga de parámetros sin recompilar
+Archivo: 28_parametros.png
+
+El porcentaje de IGV y los descuentos se cargan desde config/negocio.properties. La acción Recargar parámetros permite aplicar una configuración válida sin recompilar. Los importes históricos quedan conservados; los pedidos pendientes se recalculan al confirmar el pago.
+
+Imagen 29. Consulta del registro de errores de notificación
+Archivo: 29_errores_notificacion.png
+
+El administrador puede consultar fallos de los observadores. En esta ejecución los canales simulados respondieron correctamente y el contador es cero. Las pruebas automatizadas verifican por separado que una falla de notificación no revierte el estado del pedido ni bloquea los demás avisos.
+
+Imagen 30. Rechazo de un cupón vencido
+Archivo: 30_cupon_vencido.png
+
+Cuando el cliente intenta registrar un pedido con cupón vencido, la operación se rechaza con un mensaje explícito. No se confirma el pago ni se consume el cupón. El carrito permanece disponible para corregir la compra.
+
+Imagen 31. Compra con cupón válido y descuento registrado
+Archivo: 31_cupon_aplicado.png
+
+Después de corregir el código, se aplica el cupón vigente del 10 %. El resumen y el comprobante muestran el descuento y el total resultante. Al confirmar el pago se registra el uso del cupón para ese cliente y se habilita el acceso digital.
+
+Imagen 32. Control de uso único del cupón por cliente
+Archivo: 32_cupon_reutilizado.png
+
+El sistema rechaza un segundo intento de utilización del mismo cupón por el cliente que ya lo consumió. Esta restricción se mantiene en los datos guardados, evitando usos repetidos tras reiniciar la aplicación.
+
+Imagen 33. Reporte consolidado tras completar los flujos
+Archivo: 33_reporte_final.png
+
+El reporte final reúne las ventas válidas obtenidas durante la demostración. Los pedidos cancelados y aquellos rechazados o pendientes por falta de stock no se suman. El renglón TOTALES permite comparar los importes con los comprobantes individuales.
+
+Imagen 34. Recuperación de datos después de cerrar y abrir
+Archivo: 34_persistencia.png
+
+La aplicación se cierra y se inicia nuevamente sobre el directorio de demostración. Se recuperan los pedidos, los estados, los comprobantes, los usos de cupón, el catálogo y los correlativos. El reporte muestra las ventas conservadas y evidencia la persistencia local.
+
+Imagen 35. Registro de un pedido contraentrega
+Archivo: 35_contraentrega.png
+
+Para el cliente regular con envío estándar, contraentrega considera el pedido PAGADO desde el registro. Se emite la boleta y se descuenta el stock sin invocar un cobro bancario externo. La regla no admite envío express, recojo ni cliente corporativo.
+
+Imagen 36. Pago del primer mes de una suscripción
+Archivo: 36_suscripcion.png
+
+La suscripción cobra el primer mes, no requiere peso, stock ni envío y se entrega automáticamente al pagar. El pedido registra el acceso local a la biblioteca mensual. No se implementan renovaciones automáticas ni cobros futuros.
+
+Imagen 37. Cálculo de envío express y recargo de tarjeta
+Archivo: 37_express.png
+
+El cliente de Chimbote puede seleccionar express según la cobertura configurada. El envío considera costo fijo más tarifa por kilogramo; el recargo de tarjeta se calcula sobre subtotal menos descuentos más envío, y el IGV se desglosa del total incluido.
+
+Imagen 38. Descuento por volumen y recojo gratuito
+Archivo: 38_volumen_recojo.png
+
+El pedido reúne diez unidades físicas y obtiene el descuento por volumen del 3 %. El recojo en la tienda de Chimbote tiene costo cero. El volumen cuenta únicamente unidades físicas; se compara con el beneficio por tipo de cliente para aplicar el mayor, no sumar ambos.
+
+Imagen 39. Validación del monto máximo permitido para Yape
+Archivo: 39_limite_yape.png
+
+Un pedido de cinco cursos digitales supera S/ 500 y se rechaza al seleccionar Yape. El mensaje comunica el límite del medio de pago y el carrito queda disponible para modificar la cantidad o elegir otro medio. No se produce un cobro ni una venta.
+
+Imagen 40. Reporte de ventas incluyendo todos los medios y tipos de producto
+Archivo: 40_reporte_completo.png
+
+El reporte ampliado incorpora las ventas válidas de artículos físicos, productos digitales y suscripciones. Incluye el pedido contraentrega y el caso de volumen con recojo. El pedido express todavía pendiente y las operaciones rechazadas no se incluyen en los totales.
+
+CONCLUSIÓN SUGERIDA
+
+La demostración recorre registro, cálculo, pago, despacho, entrega y cancelación de pedidos. También evidencia validaciones de stock y cupones, separación de permisos y conservación de los datos. Los patrones State, Strategy, Visitor, Observer y Repository distribuyen estas responsabilidades. No se afirma equivalencia con el código original ausente ni integración real con banco, SUNAT, SMTP o SMS. Las diferencias concretas frente al diagrama están documentadas en ARQUITECTURA.md.
+
+EVIDENCIA Y ALCANCE
+Capturas PNG obtenidas de ventanas y diálogos reales de Swing durante el recorrido automatizado. No se retocaron importes ni se generaron pantallas ficticias. El archivo ejemplo_ticket.txt se exportó desde Guardar ticket. Las pruebas adicionales incluyen casos no fotografiados (por ejemplo, RUC inválido y fallos de pasarela).
+Fecha de ejecución: 2026-10-18
+Total de imágenes: 40

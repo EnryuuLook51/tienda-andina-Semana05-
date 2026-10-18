@@ -1,0 +1,14 @@
+TIENDA ANDINA — COMPROBANTE DE DEMOSTRACIÓN
+Sin validez tributaria
+B001-00000001
+Pedido: P00000001
+Cliente: Ana Regular
+1 x Mochila @ S/ 59.90
+1 x Curso digital @ S/ 118.00
+Subtotal: S/ 177.90
+Descuento: S/ 0.00
+Envío: S/ 9.50
+Recargo: S/ 5.62
+Base imponible: S/ 163.58
+IGV incluido: S/ 29.44
+TOTAL: S/ 193.02

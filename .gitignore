@@ -1,0 +1,16 @@
+# Licencias privadas y bloqueos de Astah
+astah_uml_license*.xml
+*.lock
+
+# Compilación, distribución y datos locales
+out/
+dist/
+datos/
+*.class
+
+# Archivos comprimidos redundantes
+*.zip
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
